@@ -1,4 +1,3 @@
-
 package com.stylemigration.stylemigration.service.webservice;
 
 import javax.xml.bind.JAXBElement;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>trans complex typeµÄ Java Àà¡£
+ * <p>trans complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="trans">
@@ -37,7 +36,7 @@ public class Trans {
     protected JAXBElement<String> base64Code;
 
     /**
-     * »ñÈ¡base64CodeÊôĞÔµÄÖµ¡£
+     * è·å–base64Codeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -49,7 +48,7 @@ public class Trans {
     }
 
     /**
-     * ÉèÖÃbase64CodeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®base64Codeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

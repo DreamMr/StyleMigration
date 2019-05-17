@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>transResponse complex typeµÄ Java Àà¡£
+ * <p>transResponse complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="transResponse">
@@ -37,7 +37,7 @@ public class TransResponse {
     protected JAXBElement<String> transResult;
 
     /**
-     * »ñÈ¡transResultÊôĞÔµÄÖµ¡£
+     * è·å–transResultå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -49,7 +49,7 @@ public class TransResponse {
     }
 
     /**
-     * ÉèÖÃtransResultÊôĞÔµÄÖµ¡£
+     * è®¾ç½®transResultå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

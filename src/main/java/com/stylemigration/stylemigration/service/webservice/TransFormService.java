@@ -1,4 +1,3 @@
-
 package com.stylemigration.stylemigration.service.webservice;
 
 import java.net.MalformedURLException;
