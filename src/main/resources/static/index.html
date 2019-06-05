@@ -8,52 +8,148 @@
 
     <script src="jquery-3.4.1.js"></script>
     <script src="./fileupload/js/vendor/jquery.ui.widget.js"></script>
-    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-    <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    <script src="./JavaScript-Load-Image-master/js/load-image.all.min.js"></script>
+    <script src="./JavaScript-Canvas-to-Blob-master/js/canvas-to-blob.min.js"></script>
     <script src="./fileupload/js/jquery.iframe-transport.js"></script>
     <script src="./fileupload/js/jquery.fileupload.js"></script>
     <script src="./fileupload/js/jquery.fileupload-process.js"></script>
     <script src="./fileupload/js/jquery.fileupload-image.js"></script>
 </head>
 <body>
-<div class="container-fluid mt-3">
-    <h1 align="center">图像风格迁移</h1>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div id = "imageUpload" class="row">
-                <input id="uploadImg" type="file" name="images[]" style="width: 100%" multiple/>
+<div class="container">
+    <h1 align="center">图像风格迁移</h1><br><br>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+                <div class="col-md-5 column">
+                    <h3 class="text-center">内容图片</h3>
+                    <div id="content">
+                        <!--<div class="col"><img src="" width="500" height="500"/></div>-->
+                    </div>
+                </div>
+                <div class="col-md-2 column">
+                    <div id = "imageUpload">
+                        <button id="reload" class="btn-primary">重置此页面</button><br><br>
+                        <input id="uploadImg" type="file" name="images[]" style="display:none" multiple/>
+                        <div id="buttonGroup" >
+                            <button id="upload" type="button" class="btn-primary">上传图片</button><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 column">
+                    <h3 class="text-center">结果图片</h3>
+                    <div class="row">
+                        <div id="result">
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--<div class="row">-->
-                <!--<div class="col"><img src=""/></div>-->
-                <!--<div class="col"><img src=""/></div>-->
+        </div>
+    </div>
+    <br><br>
+    <div class="row clearfix">
+        <div class="col-md-12 column" id="progress">
+            <!--<div class="progress" >-->
+                <!--<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" id="progress-bar">-->
+                    <!--<span class="sr-only">60% Complete</span>-->
+                <!--</div>-->
             <!--</div>-->
         </div>
     </div>
 </div>
-<script>
-    $('#uploadImg').fileupload({
-        url:'/home/upload',
-        type:'POST',
-        autoUpload: true,
-        dataType:'json',
 
-        disableImageResize:false,
-        imageMaxWidth:256,
-        imageMaxHeight:256,
-        imageMinWidth:256,
-        imageMinHeight:256,
-        imageCrop: true,
+
+
+<!--<div class="container-fluid mt-3">-->
+    <!--<h1 align="center">图像风格迁移</h1>-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-5">-->
+            <!--<h3 class="text-center">内容图片</h3>-->
+            <!--<div class="row">-->
+                <!--<div id="content" class="col-md-6">-->
+                    <!--&lt;!&ndash;<div class="col"><img src="" width="500" height="500"/></div>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-md-2">-->
+            <!--<div id = "imageUpload" class="row">-->
+                <!--<input id="uploadImg" type="file" name="images[]" style="display:none" multiple/>-->
+                <!--<div id="buttonGroup" class="btn-group-vertical">-->
+                    <!--<button id="upload" type="button" >上传图片</button><br>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col"><img src=""/></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col"><img src=""/></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="col-md-5">-->
+            <!--<h3 class="text-center">结果图片</h3>-->
+            <!--<div class="row">-->
+                <!--<div id="result">-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<script>
+    $(function () {
+        $('#uploadImg').fileupload({
+            url:'/home/upload',
+            type:'POST',
+            dataType: 'json',
+            autoUpload: false,
+
+            disableImageResize:false,
+            imageMaxWidth:256,
+            imageMaxHeight:256,
+            imageMinWidth:256,
+            imageMinHeight:256,
+            previewMaxWidth: 256,
+            previewMaxHeight: 256,
+            imageCrop: true,
+            previewCrop:true
+        }).bind('fileuploadprocessalways', function(e, data)
+        {
+            console.log("processalways");
+            var canvas = data.files[0].preview;
+            var dataURL = canvas.toDataURL();
+            console.log(data);
+            console.log(canvas);
+            console.log(dataURL);
+            $('#content').append("<div class=\"col\"><img src=\""+dataURL+"\" /></div>");
+            // $("#some-image").css("background-image", 'url(' + dataURL +')');
+        }).bind('fileuploadadd',function (e,data) {
+            console.log("add");
+            console.log(data);
+            $("#upload").after('<br>');
+            data.context = $('<button/>').text('风格转换').addClass('btn-primary')
+                .appendTo($('#buttonGroup'))
+                .click(function () {
+                    // data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+
+                    data.paramName = "0";
+                    data.submit();
+                    $("#progress").append('<div class="progress" >\n' +
+                        '                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" id="progress-bar">\n' +
+                        '                    <span class="sr-only">60% Complete</span>\n' +
+                        '                </div>\n' +
+                        '            </div>');
+                })
+            console.log(data.context);
+        }).bind('fileuploaddone',function (e,data) {
+            $('#result').append("<div class=\"col\"><img src=\""+data.result[0].after+"\" /></div>");
+            $("#progress-bar").width("100%");
+        })
+
+    });
+    $('#upload').click(function () {
+        $('#uploadImg').click();
     })
-    $('#uploadImg').fileupload().bind('fileuploaddone',function (e,data) {
-        // console.log(data.result);
-        jsonData = data.result;
-        for(var i=0;i<jsonData.length;i++){
-            console.log(jsonData[i].after);
-            $('#imageUpload').after("<div class=\"row\">\n" +
-                "                <div class=\"col\"><img src=\""+jsonData[i].before+"\"/></div>\n" +
-                "                <div class=\"col\"><img src=\""+jsonData[i].after+"\"/></div>\n" +
-                "            </div>")
-        }
+    $("#reload").click(function () {
+        window.location.reload();
     })
 </script>
 </body>

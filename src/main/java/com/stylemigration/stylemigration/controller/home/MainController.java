@@ -39,9 +39,9 @@ public class MainController {
             System.out.println(file.getOriginalFilename()+"       "+file.getSize());
             try{
                 String imageBase64 = Base64.encodeBase64String(file.getBytes());
-                System.out.println(imageBase64);
+                //System.out.println(imageBase64);
                 String transform = migration.transForm(imageBase64);
-                System.out.println(transform);
+                //System.out.println(transform);
 
 //                jsonObject.put("before","data:image/jpg;base64,"+imageBase64);
                 jsonObject.put("after",transform);
