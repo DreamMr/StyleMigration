@@ -43,7 +43,7 @@ public class MainController {
                 String transform = migration.transForm(imageBase64);
                 System.out.println(transform);
 
-                jsonObject.put("before","data:image/jpg;base64,"+imageBase64);
+//                jsonObject.put("before","data:image/jpg;base64,"+imageBase64);
                 jsonObject.put("after","data:image/jpg;base64,"+transform);
                 jsonArray.put(jsonObject);
             }catch (IOException e){
@@ -59,4 +59,5 @@ public class MainController {
         }
         return jsonArray.toString();
     }
+
 }

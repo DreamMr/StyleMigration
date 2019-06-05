@@ -24,6 +24,6 @@ public class MigrationImp implements Migration {
                 return base64Code.substring(i+1);
             }
         }
-        return null;
+        return base64Code;
     }
 }
