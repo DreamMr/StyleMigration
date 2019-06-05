@@ -44,7 +44,7 @@ public class MainController {
                 System.out.println(transform);
 
                 jsonObject.put("before","data:image/jpg;base64,"+imageBase64);
-                jsonObject.put("after","data:image/jpg;base64,"+transform);
+                jsonObject.put("after",transform);
                 jsonArray.put(jsonObject);
             }catch (IOException e){
                 e.printStackTrace();

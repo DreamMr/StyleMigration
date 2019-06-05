@@ -50,6 +50,7 @@
         // console.log(data.result);
         jsonData = data.result;
         for(var i=0;i<jsonData.length;i++){
+            console.log(jsonData[i].after);
             $('#imageUpload').after("<div class=\"row\">\n" +
                 "                <div class=\"col\"><img src=\""+jsonData[i].before+"\"/></div>\n" +
                 "                <div class=\"col\"><img src=\""+jsonData[i].after+"\"/></div>\n" +
